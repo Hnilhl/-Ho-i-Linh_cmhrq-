@@ -5,3 +5,4 @@ scipy>=1.10
 plotly>=5.17
 pulp>=2.7
 pymoo>=0.6.1
+cvxpy
