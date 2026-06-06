@@ -30,157 +30,204 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 :root {
-    --bg: #060d1c;
-    --bg2: #0b1528;
-    --bg3: #0f1e36;
-    --border: #1a2f50;
-    --accent: #00c9a7;
-    --accent2: #6366f1;
-    --txt: #d8e4f0;
-    --txt2: #8ba0b8;
-    --txt3: #4a6178;
+    --bg:      #0f1117;
+    --bg2:     #181c25;
+    --bg3:     #20252f;
+    --border:  #2c3240;
+    --accent:  #f0b429;
+    --accent2: #56b6ff;
+    --accent3: #4cd97b;
+    --red:     #ff6b6b;
+    --txt:     #dde3ed;
+    --txt2:    #8a93a2;
+    --txt3:    #4a5162;
 }
 
-html, body, .stApp { background: var(--bg) !important; font-family: 'Be Vietnam Pro', sans-serif; }
+html, body, .stApp {
+    background: var(--bg) !important;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
 
-/* Chữ toàn app */
+/* ── Chữ toàn app ── */
 .stApp, .stApp p, .stApp span, .stApp li, .stApp label,
-.stMarkdown, .stMarkdown p, .stMarkdown li, [data-testid="stMarkdownContainer"],
-[data-testid="stMarkdownContainer"] p, [data-testid="stText"] {
-    color: var(--txt) !important;
-}
-.stApp h1 { color: #ffffff !important; font-size: 2rem !important; font-weight: 800 !important; }
-.stApp h2 { color: #e8f0fb !important; font-size: 1.45rem !important; font-weight: 700 !important; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
-.stApp h3 { color: #c5d8ee !important; font-size: 1.15rem !important; font-weight: 600 !important; }
-.stApp h4 { color: #b0cce8 !important; font-size: 1rem !important; font-weight: 600 !important; }
-.stCaption, div[data-testid="stCaptionContainer"] p { color: var(--txt2) !important; font-size: 0.82rem !important; }
-.katex, .katex * { color: #e2d9f3 !important; }
+.stMarkdown, .stMarkdown p, .stMarkdown li,
+[data-testid="stMarkdownContainer"],
+[data-testid="stMarkdownContainer"] p,
+[data-testid="stText"] { color: var(--txt) !important; }
+
+.stApp h1 { color: #fff !important; font-size: 1.9rem !important; font-weight: 700 !important; letter-spacing: -0.03em; }
+.stApp h2 { color: #e8edf5 !important; font-size: 1.35rem !important; font-weight: 600 !important; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+.stApp h3 { color: #c0cad8 !important; font-size: 1.05rem !important; font-weight: 600 !important; }
+.stApp h4 { color: #8a93a2 !important; font-size: 0.9rem !important; font-weight: 600 !important; letter-spacing: 0.06em; text-transform: uppercase; }
+.stCaption, div[data-testid="stCaptionContainer"] p { color: var(--txt3) !important; font-size: 0.79rem !important; }
+.katex, .katex * { color: #f7d070 !important; }
 [data-testid="stDataFrame"] * { color: var(--txt) !important; background: transparent !important; }
 
-/* KPI Cards */
+/* ── KPI Cards ── */
 .kpi-box {
-    background: linear-gradient(135deg, #0d1e35 0%, #0f2642 100%);
+    background: var(--bg2);
     border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 18px 20px;
+    border-top: 2px solid var(--accent);
+    border-radius: 8px;
+    padding: 16px 18px 14px;
     position: relative;
-    overflow: hidden;
     height: 100%;
 }
-.kpi-box::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0;
-    height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2));
-    border-radius: 14px 14px 0 0;
+.kpi-label {
+    color: var(--txt3) !important;
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+    font-family: 'IBM Plex Mono', monospace;
 }
-.kpi-label { color: #7fa3c4 !important; font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
-.kpi-value { color: var(--accent) !important; font-size: 1.75rem; font-weight: 800; font-family: 'JetBrains Mono', monospace; line-height: 1.1; }
-.kpi-delta { display: inline-block; background: rgba(0,201,167,0.12); color: var(--accent) !important; border-radius: 6px; padding: 2px 8px; font-size: 0.72rem; font-weight: 700; margin-top: 4px; border: 1px solid rgba(0,201,167,0.25); }
+.kpi-value {
+    color: var(--txt) !important;
+    font-size: 1.55rem;
+    font-weight: 600;
+    font-family: 'IBM Plex Mono', monospace;
+    line-height: 1.15;
+}
+.kpi-delta {
+    display: inline-block;
+    color: var(--accent3) !important;
+    font-size: 0.72rem;
+    font-weight: 600;
+    margin-top: 5px;
+    font-family: 'IBM Plex Mono', monospace;
+}
+.kpi-delta::before { content: "▲ "; }
 
-/* Section header */
+/* ── Section header ── */
 .section-hdr {
-    background: linear-gradient(90deg, rgba(0,201,167,0.08), transparent);
-    border-left: 4px solid var(--accent);
-    border-radius: 0 10px 10px 0;
-    padding: 12px 18px;
-    margin-bottom: 20px;
+    background: linear-gradient(90deg, rgba(240,180,41,0.07) 0%, transparent 80%);
+    border-left: 3px solid var(--accent);
+    padding: 10px 16px;
+    margin-bottom: 22px;
+    border-radius: 0 6px 6px 0;
 }
-.section-hdr h2 { border-bottom: none !important; margin: 0 !important; padding: 0 !important; }
-.section-sub { color: var(--txt2) !important; font-size: 0.85rem !important; margin-top: 4px; }
+.section-hdr h2 { border-bottom: none !important; margin: 0 !important; padding: 0 !important; font-size: 1.1rem !important; color: #e8edf5 !important; }
+.section-sub { color: var(--txt2) !important; font-size: 0.8rem !important; margin-top: 4px; }
 
-/* Note boxes */
+/* ── Note boxes ── */
 .note {
-    background: rgba(99,102,241,0.07);
-    border-left: 4px solid var(--accent2);
-    padding: 12px 16px;
-    border-radius: 0 10px 10px 0;
+    background: rgba(86,182,255,0.05);
+    border-left: 3px solid var(--accent2);
+    padding: 11px 15px;
+    border-radius: 0 6px 6px 0;
     color: var(--txt) !important;
-    font-size: 0.88rem;
-    line-height: 1.65;
+    font-size: 0.86rem;
+    line-height: 1.7;
     margin: 12px 0;
 }
-.note b { color: #ffffff !important; }
+.note b { color: #a8d4ff !important; }
 .note-green {
-    background: rgba(0,201,167,0.07);
-    border-left: 4px solid var(--accent);
-    padding: 12px 16px;
-    border-radius: 0 10px 10px 0;
+    background: rgba(76,217,123,0.05);
+    border-left: 3px solid var(--accent3);
+    padding: 11px 15px;
+    border-radius: 0 6px 6px 0;
     color: var(--txt) !important;
-    font-size: 0.88rem;
-    line-height: 1.65;
+    font-size: 0.86rem;
+    line-height: 1.7;
     margin: 12px 0;
 }
-.note-green b { color: #ffffff !important; }
+.note-green b { color: #8ee8ab !important; }
 
-/* Level chips */
-.chip { display: inline-block; padding: 3px 11px; border-radius: 999px; font-size: 0.78rem; font-weight: 700; margin-right: 8px; }
+/* ── Chips ── */
+.chip {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-size: 0.74rem;
+    font-weight: 600;
+    margin-right: 8px;
+    font-family: 'IBM Plex Mono', monospace;
+}
 
-/* Formula block */
+/* ── Formula block ── */
 .formula-block {
-    background: rgba(99,102,241,0.06);
-    border: 1px solid rgba(99,102,241,0.2);
-    border-radius: 10px;
-    padding: 14px 18px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.82rem;
-    color: #c4b5fd !important;
-    line-height: 1.8;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent2);
+    border-radius: 0 6px 6px 0;
+    padding: 12px 16px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    color: #a8d4ff !important;
+    line-height: 1.85;
     margin: 12px 0 18px;
 }
 
-/* Sidebar */
-[data-testid="stSidebar"] { background: #080e1d !important; border-right: 1px solid var(--border); }
-[data-testid="stSidebar"] * { color: var(--txt) !important; }
-[data-testid="stSidebar"] .stRadio label { font-size: 0.87rem !important; padding: 4px 0 !important; }
-.sidebar-card {
-    background: #0d1929;
+/* ── Scenario/param card (mới cho 1.4.4) ── */
+.param-card {
+    background: var(--bg3);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 14px;
-    font-size: 0.82rem;
-    line-height: 1.7;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+}
+.param-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid var(--border); }
+.param-row:last-child { border-bottom: none; }
+.param-name { color: var(--txt2) !important; font-size: 0.84rem; }
+.param-val-from { color: var(--txt3) !important; font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; }
+.param-arrow { color: var(--accent) !important; font-size: 0.82rem; margin: 0 8px; }
+.param-val-to { color: var(--accent) !important; font-family: 'IBM Plex Mono', monospace; font-size: 0.84rem; font-weight: 600; }
+
+/* ── Sidebar ── */
+[data-testid="stSidebar"] { background: #0a0d13 !important; border-right: 1px solid var(--border); }
+[data-testid="stSidebar"] * { color: var(--txt) !important; }
+[data-testid="stSidebar"] .stRadio label { font-size: 0.85rem !important; padding: 4px 0 !important; }
+.sidebar-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 0.81rem;
+    line-height: 1.85;
     color: var(--txt) !important;
 }
-.sidebar-card b { color: #ffffff !important; }
+.sidebar-card b { color: var(--accent) !important; }
 
-/* Tabs */
-.stTabs [data-baseweb="tab-list"] { gap: 3px; background: transparent; }
-.stTabs [data-baseweb="tab"] { background: #0c1929; border-radius: 8px 8px 0 0; padding: 8px 16px; border: 1px solid var(--border); border-bottom: none; }
-.stTabs [data-baseweb="tab"] p { color: #7fa3c4 !important; font-weight: 600; font-size: 0.85rem; }
-.stTabs [aria-selected="true"] { background: #0f2645 !important; border-color: var(--accent) !important; }
+/* ── Tabs ── */
+.stTabs [data-baseweb="tab-list"] { gap: 0; background: transparent; border-bottom: 1px solid var(--border); }
+.stTabs [data-baseweb="tab"] { background: transparent; padding: 9px 16px; border: none; border-radius: 0; border-bottom: 2px solid transparent; }
+.stTabs [data-baseweb="tab"] p { color: var(--txt3) !important; font-weight: 500; font-size: 0.84rem; }
+.stTabs [aria-selected="true"] { background: transparent !important; border-bottom: 2px solid var(--accent) !important; }
 .stTabs [aria-selected="true"] p { color: var(--accent) !important; }
-.stTabs [data-baseweb="tab-panel"] { background: #080e1d; border: 1px solid var(--border); border-radius: 0 10px 10px 10px; padding: 20px; }
+.stTabs [data-baseweb="tab-panel"] { background: transparent; border: none; padding: 18px 0; }
 
-/* Sliders & inputs */
-.stSlider label, .stRadio label, .stSelectbox label { color: var(--txt) !important; font-size: 0.88rem !important; }
+/* ── Inputs ── */
+.stSlider label, .stRadio label, .stSelectbox label { color: var(--txt) !important; font-size: 0.87rem !important; }
 .stSlider [data-baseweb="slider"] [role="slider"] { background: var(--accent) !important; }
 
-/* Expander */
-.stExpander { border: 1px solid var(--border) !important; border-radius: 10px !important; background: var(--bg2) !important; }
+/* ── Expander ── */
+.stExpander { border: 1px solid var(--border) !important; border-radius: 8px !important; background: var(--bg2) !important; }
 .stExpander summary { color: var(--txt) !important; }
 
-/* Metric */
-[data-testid="stMetric"] { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 12px; }
-[data-testid="stMetricLabel"] { color: var(--txt2) !important; font-size: 0.8rem !important; }
-[data-testid="stMetricValue"] { color: var(--accent) !important; font-family: 'JetBrains Mono', monospace !important; }
+/* ── Metric ── */
+[data-testid="stMetric"] { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 12px; }
+[data-testid="stMetricLabel"] { color: var(--txt2) !important; font-size: 0.79rem !important; }
+[data-testid="stMetricValue"] { color: var(--txt) !important; font-family: 'IBM Plex Mono', monospace !important; }
 
-/* Divider */
-hr { border-color: var(--border) !important; margin: 20px 0 !important; }
+/* ── Divider ── */
+hr { border-color: var(--border) !important; margin: 18px 0 !important; }
 
-/* Success / Error */
-.stSuccess { background: rgba(0,201,167,0.1) !important; border: 1px solid rgba(0,201,167,0.3) !important; border-radius: 8px !important; color: #a7f3d0 !important; }
-.stError { background: rgba(239,68,68,0.1) !important; border: 1px solid rgba(239,68,68,0.3) !important; border-radius: 8px !important; }
-.stWarning { background: rgba(251,191,36,0.1) !important; border: 1px solid rgba(251,191,36,0.3) !important; border-radius: 8px !important; }
+/* ── Alerts ── */
+.stSuccess { background: rgba(76,217,123,0.07) !important; border: 1px solid rgba(76,217,123,0.3) !important; border-radius: 6px !important; color: #8ee8ab !important; }
+.stError   { background: rgba(255,107,107,0.07) !important; border: 1px solid rgba(255,107,107,0.3) !important; border-radius: 6px !important; }
+.stWarning { background: rgba(240,180,41,0.07)  !important; border: 1px solid rgba(240,180,41,0.3)  !important; border-radius: 6px !important; }
 </style>
 """, unsafe_allow_html=True)
 
 PLOT_TMPL = "plotly_dark"
-PALETTE = ["#00c9a7","#6366f1","#f87171","#fbbf24","#38bdf8","#fb923c","#34d399","#e879f9","#94a3b8","#a3e635"]
+PALETTE = ["#f0b429","#56b6ff","#4cd97b","#ff6b6b","#c084fc","#38bdf8","#fb923c","#e879f9","#94a3b8","#a3e635"]
 P_CLRS = dict(zip(
     ['s1 Lạc quan','s2 Cơ sở','s3 Bi quan','s4 Khủng hoảng'],
-    ['#4ade80','#60a5fa','#fb923c','#f87171']
+    ['#4cd97b','#56b6ff','#fb923c','#ff6b6b']
 ))
 
 def plotly_cfg(fig, h=380, title=None, xtitle=None, ytitle=None):
@@ -191,12 +238,12 @@ def plotly_cfg(fig, h=380, title=None, xtitle=None, ytitle=None):
         xaxis_title=xtitle,
         yaxis_title=ytitle,
         paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(11,21,40,0.6)',
-        font=dict(family='Be Vietnam Pro, sans-serif', size=12, color='#d8e4f0'),
-        title_font=dict(size=14, color='#e8f0fb', family='Be Vietnam Pro'),
-        legend=dict(bgcolor='rgba(0,0,0,0)', bordercolor='#1a2f50', borderwidth=1),
-        xaxis=dict(gridcolor='#1a2f50', linecolor='#1a2f50'),
-        yaxis=dict(gridcolor='#1a2f50', linecolor='#1a2f50'),
+        plot_bgcolor='rgba(24,28,37,0.8)',
+        font=dict(family='IBM Plex Sans, sans-serif', size=12, color='#dde3ed'),
+        title_font=dict(size=13, color='#e8edf5', family='IBM Plex Sans'),
+        legend=dict(bgcolor='rgba(0,0,0,0)', bordercolor='#2c3240', borderwidth=1),
+        xaxis=dict(gridcolor='#20252f', linecolor='#2c3240'),
+        yaxis=dict(gridcolor='#20252f', linecolor='#2c3240'),
         margin=dict(t=50 if title else 20, b=40, l=40, r=20),
     )
     return fig
@@ -336,11 +383,12 @@ with st.sidebar:
 # TIỆN ÍCH
 # ============================================================
 def kpi(col, label, value, delta=None, color=None):
-    clr = color or "#00c9a7"
-    d_html = f'<div class="kpi-delta">↑ {delta}</div>' if delta else ''
-    html = (f'<div class="kpi-box">'
+    # color dùng để tô viền top accent
+    border_clr = color or "var(--accent)"
+    d_html = f'<div class="kpi-delta">{delta}</div>' if delta else ''
+    html = (f'<div class="kpi-box" style="border-top-color:{border_clr};">'
             f'<div class="kpi-label">{label}</div>'
-            f'<div class="kpi-value" style="color:{clr}!important">{value}</div>'
+            f'<div class="kpi-value">{value}</div>'
             f'{d_html}</div>')
     col.markdown(html, unsafe_allow_html=True)
 
@@ -526,25 +574,133 @@ def page_bai1():
         note("<b>Phân tích:</b> TFP chiếm ~49% tăng trưởng — cải thiện chất lượng rõ rệt. Vốn K ~32%. Số hóa D ~10.4% và AI ~6.2% — các yếu tố mới đóng góp ngày càng lớn. Lao động L âm nhẹ do dịch chuyển cơ cấu 2020-2021 (COVID).")
 
     with tab4:
-        cc1,cc2=st.columns(2)
-        l_g=cc1.slider("Tăng trưởng L (%/năm)",0.0,3.0,0.5,0.1)
-        k_g=cc2.slider("Tăng trưởng K (%/năm)",3.0,10.0,6.0,0.5)
-        K30=K[-1]*(1+k_g/100)**5; L30=L[-1]*(1+l_g/100)**5
-        A30=A[-1]*1.012**5
-        Y30=A30*(K30**a * L30**b * 30.0**g * 100.0**d * 35.0**th)
-        cc=st.columns(3)
-        kpi(cc[0],"GDP 2030 dự báo",f"{Y30:,.0f} ng.tỷ")
-        kpi(cc[1],"Tăng trưởng BQ 25-30",f"{((Y30/Y[-1])**(1/5)-1)*100:.2f}%/năm",color="#fbbf24")
-        kpi(cc[2],"GDP/người 2030 (~110tr dân)",f"{Y30*1e12/(110e6)/25000:,.0f} USD",color="#6366f1")
-        proj=[Y[-1]]+[Y[-1]*(Y30/Y[-1])**((t+1)/5) for t in range(5)]
-        fig=go.Figure()
-        fig.add_scatter(x=list(range(2025,2031)),y=proj,mode="lines+markers",name="GDP dự báo",
-                       line=dict(color="#00c9a7",width=2.5),marker=dict(size=8))
-        fig.add_vline(x=2025,line_dash="dash",line_color="#4b6070",
-                     annotation_text="Thực tế",annotation_font_color="#4b6070")
-        st.plotly_chart(plotly_cfg(fig,title=f"Quỹ đạo GDP 2025→2030 (kịch bản: D=30%, AI=100K DN, H=35%)",
-                                   xtitle="Năm",ytitle="GDP (ng.tỷ VND)"), use_container_width=True)
-        note("<b>Kịch bản 2030:</b> D=30% GDP số (từ 19.5%), AI=100K DN số (từ 80.1K), H=35% LĐ qua đào tạo (từ 29.2%), K tăng 6%/năm, TFP tăng 1.2%/năm. Mục tiêu 30% KTS/GDP 2030 khả thi nếu duy trì đầu tư D & H song song.",green=True)
+        # ── Tham số kịch bản CỐ ĐỊNH theo đề bài ─────────────────────────────
+        # "D tăng lên 30%, AI = 100 nghìn DN, H = 35%, K và L tăng đều 6%/năm, TFP tăng 1,2%/năm"
+        D30_val  = 30.0    # % kinh tế số / GDP
+        AI30_val = 100.0   # nghìn doanh nghiệp số
+        H30_val  = 35.0    # % lao động qua đào tạo
+        k_rate   = 0.06    # K tăng 6%/năm
+        l_rate   = 0.06    # L tăng 6%/năm
+        tfp_rate = 0.012   # TFP tăng 1,2%/năm
+        n_yr     = 5       # 2025→2030
+
+        K30 = K[-1] * (1 + k_rate) ** n_yr
+        L30 = L[-1] * (1 + l_rate) ** n_yr
+        A30 = A[-1] * (1 + tfp_rate) ** n_yr
+        Y30 = A30 * (K30**a * L30**b * D30_val**g * AI30_val**d * H30_val**th)
+        g30 = ((Y30 / Y[-1]) ** (1/n_yr) - 1) * 100
+        gdp_usd = Y30 * 1e12 / (110e6) / 25000
+
+        # ── KPI ────────────────────────────────────────────────────────────────
+        cc = st.columns(3)
+        kpi(cc[0], "GDP 2030 dự báo", f"{Y30:,.0f} ng.tỷ VND")
+        kpi(cc[1], "Tăng trưởng BQ 2025-30", f"{g30:.2f}%/năm")
+        kpi(cc[2], "GDP/người 2030 (~110 tr)", f"{gdp_usd:,.0f} USD")
+        st.markdown("<br>", unsafe_allow_html=True)
+
+        # ── Bảng tham số so sánh 2025 vs 2030 ────────────────────────────────
+        st.markdown("##### 📋 Thông số kịch bản — So sánh 2025 và 2030")
+        params_html = """
+        <div class="param-card">
+          <div class="param-row">
+            <span class="param-name">Vốn K (nghìn tỷ VND)</span>
+            <span class="param-val-from">{k0:,.0f}</span>
+            <span class="param-arrow">→</span>
+            <span class="param-val-to">{k1:,.0f} &nbsp;<small style="color:var(--accent3);font-size:0.75rem">+6%/năm</small></span>
+          </div>
+          <div class="param-row">
+            <span class="param-name">Lao động L (triệu người)</span>
+            <span class="param-val-from">{l0:.1f}</span>
+            <span class="param-arrow">→</span>
+            <span class="param-val-to">{l1:.2f} &nbsp;<small style="color:var(--accent3);font-size:0.75rem">+6%/năm</small></span>
+          </div>
+          <div class="param-row">
+            <span class="param-name">D — Kinh tế số / GDP (%)</span>
+            <span class="param-val-from">{d0:.1f}%</span>
+            <span class="param-arrow">→</span>
+            <span class="param-val-to">30% &nbsp;<small style="color:var(--accent3);font-size:0.75rem">+{dd:.1f} đpt</small></span>
+          </div>
+          <div class="param-row">
+            <span class="param-name">AI — Doanh nghiệp số (nghìn DN)</span>
+            <span class="param-val-from">{ai0:.1f}</span>
+            <span class="param-arrow">→</span>
+            <span class="param-val-to">100 &nbsp;<small style="color:var(--accent3);font-size:0.75rem">+{dai:.1f}</small></span>
+          </div>
+          <div class="param-row">
+            <span class="param-name">H — Lao động qua đào tạo (%)</span>
+            <span class="param-val-from">{h0:.1f}%</span>
+            <span class="param-arrow">→</span>
+            <span class="param-val-to">35% &nbsp;<small style="color:var(--accent3);font-size:0.75rem">+{dh:.1f} đpt</small></span>
+          </div>
+          <div class="param-row">
+            <span class="param-name">TFP (A_t)</span>
+            <span class="param-val-from">{a0:.4f}</span>
+            <span class="param-arrow">→</span>
+            <span class="param-val-to">{a1:.4f} &nbsp;<small style="color:var(--accent3);font-size:0.75rem">+1,2%/năm</small></span>
+          </div>
+        </div>
+        """.format(
+            k0=K[-1], k1=K30, l0=L[-1], l1=L30,
+            d0=D[-1], dd=D30_val-D[-1],
+            ai0=AI[-1], dai=AI30_val-AI[-1],
+            h0=H[-1], dh=H30_val-H[-1],
+            a0=A[-1], a1=A30
+        )
+        st.markdown(params_html, unsafe_allow_html=True)
+
+        # ── Quỹ đạo GDP tính chính xác từng năm ──────────────────────────────
+        years_proj = list(range(2025, 2031))
+        gdp_proj = [Y[-1]]
+        for t in range(1, n_yr + 1):
+            Kt  = K[-1]  * (1 + k_rate)   ** t
+            Lt  = L[-1]  * (1 + l_rate)   ** t
+            At  = A[-1]  * (1 + tfp_rate) ** t
+            Dt  = D[-1]  + (D30_val  - D[-1])  * t / n_yr   # tuyến tính
+            AIt = AI[-1] + (AI30_val - AI[-1]) * t / n_yr
+            Ht  = H[-1]  + (H30_val  - H[-1])  * t / n_yr
+            gdp_proj.append(At * (Kt**a * Lt**b * Dt**g * AIt**d * Ht**th))
+
+        # ── Biểu đồ: lịch sử 2020-2025 + dự báo 2025-2030 ───────────────────
+        fig = go.Figure()
+        # Chuỗi lịch sử
+        fig.add_scatter(
+            x=list(years), y=list(Y),
+            mode="lines+markers", name="Thực tế 2020-2025",
+            line=dict(color="#8b949e", width=2, dash="solid"),
+            marker=dict(size=7, color="#8b949e", symbol="circle"))
+        # Chuỗi dự báo
+        fig.add_scatter(
+            x=years_proj, y=gdp_proj,
+            mode="lines+markers", name="Dự báo 2025-2030",
+            line=dict(color="#f0b429", width=2.5, dash="dot"),
+            marker=dict(size=9, color="#f0b429", symbol="diamond"))
+        fig.add_vline(x=2025, line_dash="dash", line_color="#4a5162",
+                     annotation_text="2025 — Điểm khởi chiếu",
+                     annotation_font_color="#8a93a2", annotation_font_size=11)
+        fig.add_vrect(x0=2025, x1=2030,
+                     fillcolor="rgba(240,180,41,0.04)", layer="below", line_width=0)
+        st.plotly_chart(plotly_cfg(
+            fig, h=400,
+            title="Quỹ đạo GDP Việt Nam 2020→2030 | D=30%, AI=100K DN, H=35%, K&L +6%/năm, TFP +1,2%/năm",
+            xtitle="Năm", ytitle="GDP (nghìn tỷ VND)"),
+            use_container_width=True)
+
+        # ── Bảng kết quả từng năm ─────────────────────────────────────────────
+        df_proj = pd.DataFrame({
+            "Năm": years_proj,
+            "GDP dự báo (ng.tỷ)": [round(v, 1) for v in gdp_proj],
+            "Tăng trưởng YoY (%)": ["-"] + [f"{(gdp_proj[i]/gdp_proj[i-1]-1)*100:.2f}%" for i in range(1, len(gdp_proj))],
+        })
+        st.dataframe(df_proj, use_container_width=True, hide_index=True)
+
+        note(
+            f"<b>Kết quả mô phỏng kịch bản đến 2030:</b> "
+            f"Với D tăng lên 30%, AI = 100K doanh nghiệp số, H = 35%, "
+            f"K và L <b>đều tăng 6%/năm</b>, TFP tăng <b>1,2%/năm</b> — "
+            f"GDP Việt Nam 2030 ước đạt <b>{Y30:,.0f} nghìn tỷ VND</b>, "
+            f"tốc độ tăng trưởng bình quân <b>{g30:.2f}%/năm</b> giai đoạn 2025-2030. "
+            f"Mục tiêu 30% kinh tế số/GDP năm 2030 hoàn toàn khả thi nếu duy trì đầu tư song song D và H.",
+            green=True)
 
 # ============================================================
 # BÀI 2
